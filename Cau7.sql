@@ -1,0 +1,28 @@
+SELECT
+    dp.MADATPHONG,
+    p.MAPHONG,
+    p.LOAIPHONG,
+    p.SOKHACHTOIDA,
+    p.GIAPHONG,
+    kh.MAKH,
+    kh.TENKH,
+    kh.SDT,
+    dp.NGAYDAT,
+    dp.GIOBATDAU,
+    dp.GIOKETTHUC,
+    ctsd.MADV,
+    ctsd.SOLUONG,
+    dvdk.DONGIA
+FROM
+    DAT_PHONG AS dp
+JOIN
+    PHONG AS p ON dp.MAPHONG = p.MAPHONG
+JOIN
+    KHACH_HANG AS kh ON dp.MAKH = kh.MAKH
+LEFT JOIN
+    CHI_TIET_SU_DUNG_DV AS ctsd ON dp.MADATPHONG = ctsd.MADATPHONG
+LEFT JOIN
+    DICH_VU_DI_KEM AS dvdk ON ctsd.MADV = dvdk.MADV
+WHERE
+    (YEAR(dp.NGAYDAT) = 2016 OR YEAR(dp.NGAYDAT) = 2017)
+    AND p.GIAPHONG > 50000;
